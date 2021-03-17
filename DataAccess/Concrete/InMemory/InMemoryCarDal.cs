@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,7 +33,17 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car) => _cars.Remove(_cars.SingleOrDefault(c => c.Id == car.Id));
 
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetAll() => _cars;
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            return filter == null ? _cars : _cars.Where(c=>c.DailyPrice<13).ToList();//uydurdum
+        }
 
         public List<Car> GetById(int id) => _cars.Where(c => c.Id == id).ToList();
 
