@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.DTOs
 {
-    public class Brand:IEntity
+    public class CarDetailDto:IDto
     {
-        public int Id { get; set; }
+        public int CarId { get; set; }
+        public string CarName { get; set; }
         public string BrandName { get; set; }
     }
 }
