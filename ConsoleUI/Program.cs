@@ -10,16 +10,28 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarTest();
 
             //EfCarDal efCarDal = new EfCarDal();
             //efCarDal.Add(new Car
             //{
-            //    CarName="Megan", BrandId=2, ColorId=3, DailyPrice=400, ModelYear=2018, Description="Manuel"
+            //    CarName = "Megan",
+            //    BrandId = 2,
+            //    ColorId = 3,
+            //    DailyPrice = 400,
+            //    ModelYear = 2018,
+            //    Description = "Manuel"
             //});
+            //EfBrandDal efBrandDal = new EfBrandDal();
+            //efBrandDal.Add(new Brand
+            //{
+            //    Id = 8,
+            //    BrandName = "Mazda"
+            //});
+            //EfColorDal efColorDal = new EfColorDal();
+            //efColorDal.Update(new Color { Id = 6, ColorName = "Siyah" });
 
             //BrandTest();
-
+            //CarTest();
             //ColorTest();
         }
 
@@ -29,7 +41,7 @@ namespace ConsoleUI
 
             foreach (var item in carManager.GetCarDetails())
             {
-                Console.WriteLine(item.CarName + "/" + item.BrandName);
+                Console.WriteLine(item.CarName + "/" + item.BrandName + "/" + item.ColorName + "/" + item.DailyPrice);
             }
         }
 
