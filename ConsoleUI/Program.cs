@@ -11,37 +11,38 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            //EfCarDal efCarDal = new EfCarDal();
-            //efCarDal.Add(new Car
-            //{
-            //    CarName = "Megan",
-            //    BrandId = 2,
-            //    ColorId = 3,
-            //    DailyPrice = 400,
-            //    ModelYear = 2018,
-            //    Description = "Manuel"
-            //});
-            //EfBrandDal efBrandDal = new EfBrandDal();
-            //efBrandDal.Add(new Brand
-            //{
-            //    Id = 8,
-            //    BrandName = "Mazda"
-            //});
+
             //EfColorDal efColorDal = new EfColorDal();
             //efColorDal.Update(new Color { Id = 6, ColorName = "Siyah" });
-
+            //CRUDBrand();
             //BrandTest();
-            //CarTest();
+            CarTest();
             //ColorTest();
+        }
+
+        private static void CRUDBrand()
+        {
+            EfBrandDal efBrandDal = new EfBrandDal();
+            //efBrandDal.Add(new Brand { BrandName = "Ford" });
+            //efBrandDal.Update(new Brand { Id = 9, BrandName = "Chevrolet" });
+            efBrandDal.Delete(new Brand { Id = 9 });
         }
 
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-
-            foreach (var item in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
-                Console.WriteLine(item.CarName + "/" + item.BrandName + "/" + item.ColorName + "/" + item.DailyPrice);
+
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine(item.CarName + "\t" + item.BrandName + "\t" + item.ColorName + "\t" + item.DailyPrice);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
 
