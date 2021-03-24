@@ -15,23 +15,12 @@ namespace Core.DataAccess.EntityFramework
     {
         public void Add(TEntity entity)
         {
-            //if (entity.Description.Length < 2)
-            //{
-            //    Console.WriteLine("Tanım en az 2 karakter olmalı");
-            //    return;
-            //}
-            //else if (entity.DailyPrice <= 0)
-            //{
-            //    Console.WriteLine("Günlük kirayı hatalı girdiniz");
-            //    return;
-            //}
             using (TContext context = new TContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
                 context.SaveChanges();
             }
-            Console.WriteLine("Ekleme Başarılı");
         }
 
         public void Delete(TEntity entity)
@@ -43,7 +32,6 @@ namespace Core.DataAccess.EntityFramework
                 context.SaveChanges();
             }
         }
-
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext context = new TContext())
@@ -59,22 +47,6 @@ namespace Core.DataAccess.EntityFramework
                 return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
             }
         }
-
-        //public Car GetCarsByBrandId(Expression<Func<Car, bool>> filter)
-        //{
-        //    using (ReCapDBContext context = new ReCapDBContext())
-        //    {
-        //        return context.Set<Car>().SingleOrDefault(filter);
-        //    }
-        //}
-
-        //public Car GetCarsByColorId(Expression<Func<Car, bool>> filter)
-        //{
-        //    using (ReCapDBContext context = new ReCapDBContext())
-        //    {
-        //        return context.Set<Car>().SingleOrDefault(filter);
-        //    }
-        //}
 
         public void Update(TEntity entity)
         {

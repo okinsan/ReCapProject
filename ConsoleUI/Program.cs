@@ -10,14 +10,45 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-
-
             //EfColorDal efColorDal = new EfColorDal();
             //efColorDal.Update(new Color { Id = 6, ColorName = "Siyah" });
             //CRUDBrand();
             //BrandTest();
-            CarTest();
+            //CarTest();
             //ColorTest();
+            //UserTest();
+            //CustomerTest();
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result=rentalManager.Add(new Rental { CarId = 5, CustomerId = 1, RentDate = DateTime.Now });
+            Console.WriteLine(result.Message);
+
+            foreach (var item in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(item.Id+"/"+item.CarId);
+            }
+            
+        }
+
+        private static void CustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            customerManager.Add(new Customer { UserId = 1, CompanyName = "Knsn" });
+            customerManager.Add(new Customer { UserId = 1, CompanyName = "Snkn" });
+            customerManager.Add(new Customer { UserId = 2, CompanyName = "fasfew" });
+            foreach (var item in customerManager.GetAll().Data)
+            {
+                Console.WriteLine(item.CompanyName);
+            }
+        }
+
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            userManager.Add(new User { FirstName = "Hasan", LastName = "Boğuldu", Email = "oguzk@oguz.com", Password = "13548ef" });
+            foreach (var item in userManager.GetAll().Data)
+            {
+                Console.WriteLine(item.Id + ") " + item.FirstName + " " + item.LastName);
+            }
         }
 
         private static void CRUDBrand()
@@ -49,7 +80,7 @@ namespace ConsoleUI
         private static void BrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var item in brandManager.GetAll())
+            foreach (var item in brandManager.GetAll().Data)
             {
                 Console.WriteLine(item.BrandName);
             }
@@ -58,7 +89,7 @@ namespace ConsoleUI
         private static void ColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var item in colorManager.GetAll())
+            foreach (var item in colorManager.GetAll().Data)
             {
                 Console.WriteLine(item.ColorName);
             }
