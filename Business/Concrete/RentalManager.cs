@@ -37,6 +37,12 @@ namespace Business.Concrete
             }
         }
 
+        public Result Delete(Rental rental)
+        {
+            _rentalDal.Delete(rental);
+            return new SuccessResult(Messages.RentalDeleted);
+        }
+
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalListed);
@@ -65,6 +71,12 @@ namespace Business.Concrete
         public IDataResult<List<Rental>> GetByReturnDate(DateTime dateTime)
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.ReturnDate == dateTime));
+        }
+
+        public Result Update(Rental rental)
+        {
+            _rentalDal.Update(rental);
+            return new SuccessResult(Messages.RentalUpdated);
         }
     }
 }

@@ -29,6 +29,12 @@ namespace Business.Concrete
             }
         }
 
+        public Result Delete(User user)
+        {
+            _userDal.Delete(user);
+            return new SuccessResult(Messages.UserDeleted);
+        }
+
         public IDataResult<List<User>> GetAll()
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UserListed);
@@ -52,6 +58,12 @@ namespace Business.Concrete
         public IDataResult<List<User>> GetByLastName(string lastName)
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.LastName == lastName), Messages.UserListed);
+        }
+
+        public Result Update(User user)
+        {
+            _userDal.Update(user);
+            return new SuccessResult(Messages.UserUpdated);
         }
     }
 }

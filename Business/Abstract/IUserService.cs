@@ -11,6 +11,8 @@ namespace Business.Abstract
     public interface IUserService
     {
         Result Add(User user);
+        Result Delete(User user);
+        Result Update(User user);
         IDataResult<List<User>> GetAll();
         IDataResult<User> GetByID(int userId);
         IDataResult<List<User>> GetByFirstName(string firstName);

@@ -31,6 +31,17 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
+        public Result Update(Car car)
+        {
+            _carDal.Update(car);
+            return new SuccessResult(Messages.CarUpdated);
+        }
+        public Result Delete(Car car)
+        {
+            _carDal.Delete(car);
+            return new SuccessResult(Messages.CarDeleted);
+        }
+
         public IDataResult<List<Car>> GetAll() 
         {
             if (DateTime.Now.Hour==18)
