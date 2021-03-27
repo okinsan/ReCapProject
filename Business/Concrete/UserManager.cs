@@ -50,9 +50,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.FirstName == firstName), Messages.UserListed);
         }
 
-        public IDataResult<User> GetByID(int userId)
+        public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
         }
 
         public IDataResult<List<User>> GetByLastName(string lastName)

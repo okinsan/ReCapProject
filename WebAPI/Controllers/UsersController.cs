@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
         [HttpGet("getuserbyid")]
         public IActionResult GetUserById(int id)
         {
-            var result = _userService.GetByID(id);
+            var result = _userService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);

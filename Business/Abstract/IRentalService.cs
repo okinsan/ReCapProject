@@ -8,13 +8,8 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IRentalService
+    public interface IRentalService:ICrudService<Rental>
     {
-        Result Add(Rental rental);
-        Result Update(Rental rental);
-        Result Delete(Rental rental);
-        IDataResult<List<Rental>> GetAll();
-        IDataResult<Rental> GetByID(int rentalId);
         IDataResult<Rental> GetByCarID(int carId);
         IDataResult<List<Rental>> GetByCustomerID(int customerId);
         IDataResult<List<Rental>> GetByRentDate(DateTime dateTime);

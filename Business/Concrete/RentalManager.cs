@@ -58,9 +58,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.CustomerId == customerId));
         }
 
-        public IDataResult<Rental> GetByID(int rentalId)
+        public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == rentalId));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
         }
 
         public IDataResult<List<Rental>> GetByRentDate(DateTime dateTime)
