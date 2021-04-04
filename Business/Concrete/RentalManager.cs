@@ -21,23 +21,23 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        public Result Add(Rental rental)
+        public IResult Add(Rental rental)
         {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            var result = rentalManager.GetByCarID(rental.CarId);
+            var result = _rentalDal.GetAll(r => r.CarId == rental.CarId);
 
-            if (result.Data!=null && result.Data.ReturnDate.Year==0001)
+            foreach (var item in result)
             {
-                return new ErrorResult(Messages.RentalInvalid);
+                if (item.ReturnDate.Year==0001)
+                {
+                    return new ErrorResult(Messages.RentalInvalid);
+                }
             }
-            else
-            {
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.RentalAdded);
-            }
+
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
-        public Result Delete(Rental rental)
+        public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
@@ -65,7 +65,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Rental>> GetByRentDate(DateTime dateTime)
         {
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.RentDate== dateTime));
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.RentDate == dateTime));
         }
 
         public IDataResult<List<Rental>> GetByReturnDate(DateTime dateTime)
@@ -73,7 +73,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.ReturnDate == dateTime));
         }
 
-        public Result Update(Rental rental)
+        public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);

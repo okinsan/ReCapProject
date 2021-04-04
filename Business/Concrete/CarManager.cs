@@ -25,18 +25,18 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
-        public Result Add(Car car)
+        public IResult Add(Car car)
         {
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
 
-        public Result Update(Car car)
+        public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
-        public Result Delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
@@ -44,7 +44,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll() 
         {
-            if (DateTime.Now.Hour==18)
+            if (DateTime.Now.Hour==25)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -58,7 +58,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            if (DateTime.Now.Hour == 18)
+            if (DateTime.Now.Hour == 25)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
@@ -73,6 +73,11 @@ namespace Business.Concrete
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Car>> (_carDal.GetAll(c => c.ColorId == id));
+        }
+
+        private IResult CheckIfCarCountOfColor(int colorId)
+        {
+            return _carDal.GetAll(p => p.ColorId == colorId).Count < 15 ? new SuccessResult() : new ErrorResult();
         }
     }
 }

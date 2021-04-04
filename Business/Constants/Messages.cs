@@ -46,5 +46,10 @@ namespace Business.Constants
         public static string RentalUpdated = "Güncellendi";
         public static string RentalDeleted = "Silindi";
 
+        public static string CarImageAdded = "Resim Eklendi";
+        public static string CarImageNameInvalid = "Resim ismi geçersiz";
+        public static string CarImagesListed = "Resimler Listelendi";
+        public static string CarImageUpdated = "Resim bilgisi güncellendi";
+        public static string CarImageDeleted = "Resim silindi";
     }
 }

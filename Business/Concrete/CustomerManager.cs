@@ -20,7 +20,7 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
-        public Result Add(Customer customer)
+        public IResult Add(Customer customer)
         {
             if (true)
             {
@@ -29,7 +29,7 @@ namespace Business.Concrete
             }
         }
 
-        public Result Delete(Customer customer)
+        public IResult Delete(Customer customer)
         {
             _customerDal.Delete(customer);
             return new SuccessResult(Messages.CustomerDeleted);
@@ -55,7 +55,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Customer>(_customerDal.Get(c => c.UserId == userId));
         }
 
-        public Result Update(Customer customer)
+        public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
             return new SuccessResult(Messages.CustomerUpdated);

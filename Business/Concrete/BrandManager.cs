@@ -20,7 +20,7 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public Result Add(Brand brand)
+        public IResult Add(Brand brand)
         {
             if (true)
             {
@@ -29,7 +29,7 @@ namespace Business.Concrete
             }
         }
 
-        public Result Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
             return new SuccessResult(Messages.BrandDeleted);
@@ -45,7 +45,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == brandId));
         }
 
-        public Result Update(Brand brand)
+        public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
             return new SuccessResult(Messages.BrandUpdated);

@@ -13,7 +13,5 @@ namespace Business.Abstract
         IDataResult<List<User>> GetByFirstName(string firstName);
         IDataResult<List<User>> GetByLastName(string lastName);
         IDataResult<User> GetByEmail(string email);
-
-
     }
 }

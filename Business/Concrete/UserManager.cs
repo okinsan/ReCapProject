@@ -20,7 +20,7 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public Result Add(User user)
+        public IResult Add(User user)
         {
             if (true)
             {
@@ -29,7 +29,7 @@ namespace Business.Concrete
             }
         }
 
-        public Result Delete(User user)
+        public IResult Delete(User user)
         {
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
@@ -60,7 +60,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.LastName == lastName), Messages.UserListed);
         }
 
-        public Result Update(User user)
+        public IResult Update(User user)
         {
             _userDal.Update(user);
             return new SuccessResult(Messages.UserUpdated);
