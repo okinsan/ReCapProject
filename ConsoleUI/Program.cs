@@ -1,6 +1,6 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
 
@@ -19,14 +19,14 @@ namespace ConsoleUI
             //UserTest();
             //CustomerTest();
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            var result=rentalManager.Add(new Rental { CarId = 5, CustomerId = 1, RentDate = DateTime.Now });
+            var result = rentalManager.Add(new Rental { CarId = 5, CustomerId = 1, RentDate = DateTime.Now });
             Console.WriteLine(result.Message);
 
             foreach (var item in rentalManager.GetAll().Data)
             {
-                Console.WriteLine(item.Id+"/"+item.CarId);
+                Console.WriteLine(item.Id + "/" + item.CarId);
             }
-            
+
         }
 
         private static void CustomerTest()
@@ -41,15 +41,15 @@ namespace ConsoleUI
             }
         }
 
-        private static void UserTest()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
-            userManager.Add(new User { FirstName = "Hasan", LastName = "Boğuldu", Email = "oguzk@oguz.com", Password = "13548ef" });
-            foreach (var item in userManager.GetAll().Data)
-            {
-                Console.WriteLine(item.Id + ") " + item.FirstName + " " + item.LastName);
-            }
-        }
+        //private static void UserTest()
+        //{
+        //    UserManager userManager = new UserManager(new EfUserDal());
+        //    userManager.Add(new User { FirstName = "Hasan", LastName = "Boğuldu", Email = "oguzk@oguz.com",});
+        //    foreach (var item in userManager.GetAll().Data)
+        //    {
+        //        Console.WriteLine(item.Id + ") " + item.FirstName + " " + item.LastName);
+        //    }
+        //}
 
         private static void CRUDBrand()
         {

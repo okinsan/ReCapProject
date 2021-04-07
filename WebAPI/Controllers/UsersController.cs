@@ -1,11 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Entities.Concrete;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -68,11 +64,11 @@ namespace WebAPI.Controllers
         public IActionResult GetUserByEmail(string email)
         {
             var result = _userService.GetByEmail(email);
-            if (result.Success)
-            {
+            //if (result.Success)
+            //{
                 return Ok(result);
-            }
-            return BadRequest(result);
+            //}
+            //return BadRequest(result);
         }
 
         [HttpPost("adduser")]

@@ -2,13 +2,8 @@
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -16,7 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public List<CarDetailDto> GetCarDetails()
         {
-            using (ReCapDBContext context=new ReCapDBContext())
+            using (ReCapDBContext context = new ReCapDBContext())
             {
                 var result = from c in context.Cars
                              join b in context.Brands
@@ -27,8 +22,8 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  CarName = c.CarName,
                                  BrandName = b.BrandName,
-                                 ColorName=r.ColorName,
-                                 DailyPrice=c.DailyPrice
+                                 ColorName = r.ColorName,
+                                 DailyPrice = c.DailyPrice
                              };
                 return result.ToList();
             }

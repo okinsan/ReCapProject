@@ -1,17 +1,14 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluetValidation;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Validatiton;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -24,6 +21,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -42,9 +40,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
-        public IDataResult<List<Car>> GetAll() 
+        public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour==25)
+            if (DateTime.Now.Hour == 25)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -62,17 +60,17 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetCarDetails());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>> (_carDal.GetAll(c=>c.BrandId == id));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return new SuccessDataResult<List<Car>> (_carDal.GetAll(c => c.ColorId == id));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
         }
 
         private IResult CheckIfCarCountOfColor(int colorId)

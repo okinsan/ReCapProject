@@ -2,13 +2,9 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -27,7 +23,7 @@ namespace Business.Concrete
 
             foreach (var item in result)
             {
-                if (item.ReturnDate.Year==0001)
+                if (item.ReturnDate.Year == 0001)
                 {
                     return new ErrorResult(Messages.RentalInvalid);
                 }

@@ -1,17 +1,14 @@
-﻿using Core.Utilities.Results;
-using Entities.Concrete;
-using System;
+﻿using Core.Entities.Concrete;
+using Core.Utilities.Results;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IUserService:ICrudService<User>
+    public interface IUserService : ICrudService<User>
     {
         IDataResult<List<User>> GetByFirstName(string firstName);
         IDataResult<List<User>> GetByLastName(string lastName);
-        IDataResult<User> GetByEmail(string email);
+        User GetByEmail(string email);
+        IDataResult<List<OperationClaim>> GetClaims(User user);
     }
 }
